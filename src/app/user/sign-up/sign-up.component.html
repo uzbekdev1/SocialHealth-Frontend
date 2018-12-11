@@ -1,0 +1,64 @@
+<mat-vertical-stepper labelPosition="bottom" #stepper>
+  <mat-step [stepControl]="firstFormGroup">
+      <form [formGroup]="firstFormGroup">
+          <ng-template matStepLabel>Informacion Basica</ng-template>
+          <mat-form-field class="full-width">
+              <input matInput placeholder="Nombre Completo" formControlName="fullName" required>
+          </mat-form-field>
+          <mat-form-field class="full-width">
+            <input matInput placeholder="Username" formControlName="username">
+          </mat-form-field>
+          <mat-form-field>
+              <mat-select placeholder="Tipo de Cuenta" formControlName="userType">
+                <mat-option *ngFor="let item of types" [value]="item.value">
+                  {{item.viewValue}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          <div>
+              <button mat-button color="primary" matStepperNext>Siguiente</button>
+          </div>
+      </form>
+  </mat-step>
+  <mat-step [stepControl]="secondFormGroup">
+      <form [formGroup]="secondFormGroup">
+          <ng-template matStepLabel>Autentificacion</ng-template>
+          <mat-form-field class="full-width">
+              <input matInput placeholder="Email" formControlName="email" required>
+          </mat-form-field >
+          <!--  -->
+          <mat-form-field class="full-width">
+            <input matInput placeholder="Contraseña" type="password" formControlName="password" required>
+          </mat-form-field>
+          <!--  -->
+          <mat-form-field class="full-width">
+            <input matInput placeholder="Confirmar Contraseña" type="password"formControlName="confirmPassword" required>
+          </mat-form-field>
+          <div>
+              <button mat-button color="primary" matStepperPrevious>Atras</button>
+              <button mat-button color="primary" matStepperNext>Siguiente</button>
+          </div>
+      </form>
+  </mat-step>
+  <mat-step>
+      <ng-template matStepLabel>Terminado</ng-template>
+      <!-- Ya terminaste! -->
+      <div>
+          <button mat-button color="primary" matStepperPrevious>Atras</button>
+          <!-- <button mat-button (click)="stepper.reset()">Reset</button> -->
+          <button type="submit" mat-raised-button color="primary" (click)="printValues()">Registrarse</button>
+      </div>
+  </mat-step>
+</mat-vertical-stepper>
+
+
+
+<!-- Success message -->
+<div class="success" *ngIf="showSucessMessage">
+  Saved successfully
+</div>
+
+<!-- Error message -->
+<div class="alert" *ngIf="serverErrorMessages">
+  {{serverErrorMessages}}
+</div>

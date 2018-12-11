@@ -1,0 +1,15 @@
+<div class="container">
+  <mat-toolbar color="primary" class="toolbar mat-elevation-z4">
+      <span>SocialHealth</span>
+  </mat-toolbar>
+  <mat-card class="user-card">
+    <mat-card-header class="card-header text-center">
+      <mat-card-title>
+        <h4 class="card-title"  routerLink="/login"  routerLinkActive="visible">Iniciar Sesion </h4>
+        <h4 class="card-title"  routerLink="/signup"  routerLinkActive="visible">Crear Cuenta </h4>
+      </mat-card-title>
+      <!-- <mat-card-subtitle>Sing-in</mat-card-subtitle> -->
+    </mat-card-header>
+    <router-outlet></router-outlet>
+  </mat-card>
+</div>
