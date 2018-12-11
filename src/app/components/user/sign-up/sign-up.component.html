@@ -46,7 +46,7 @@
       <div>
           <button mat-button color="primary" matStepperPrevious>Atras</button>
           <!-- <button mat-button (click)="stepper.reset()">Reset</button> -->
-          <button type="submit" mat-raised-button color="primary" (click)="printValues()">Registrarse</button>
+          <button type="submit" mat-raised-button color="primary" (click)="(firstFormGroup.valid && secondFormGroup.valid ) && onSubmit(firstFormGroup,secondFormGroup)">Registrarse</button>
       </div>
   </mat-step>
 </mat-vertical-stepper>

@@ -1,0 +1,22 @@
+<mat-card-content class="card-content">
+  <form class="form" #signInForm="ngForm" (ngSubmit)="signInForm.valid && onSubmit(signInForm)">
+      <mat-form-field class="full-width">
+        <input matInput name="email" #email="ngModel" [(ngModel)]="model.email" 
+        placeholder="Email" [pattern]="emailRegex" required autocomplete="email">
+      </mat-form-field>
+
+      <mat-form-field class="full-width">
+        <input matInput placeholder="Password" name="password" 
+        type="password" #password="ngModel" [(ngModel)]="model.password" required minlength="4">
+      </mat-form-field>
+    </form>
+</mat-card-content>
+<mat-card-actions class="card-actions text-center">
+  <button mat-button color="primary" routerLink="/signup">Crear Cuenta</button>
+  <span class="fill-remaining-space"></span>
+  <button type="submit" mat-raised-button color="primary" (click)="signInForm.valid && onSubmit(signInForm)">Iniciar Sesion</button>
+</mat-card-actions>
+  <!-- Error message -->
+<div class="alert" *ngIf="serverErrorMessages">
+    {{serverErrorMessages}}
+  </div>

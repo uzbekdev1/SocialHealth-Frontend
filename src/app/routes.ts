@@ -1,9 +1,13 @@
 import { Routes } from '@angular/router';
-import { UserComponent } from './user/user.component';
-import { SignUpComponent } from './user/sign-up/sign-up.component';
-import { SignInComponent } from './user/sign-in/sign-in.component';
-import { UserProfileComponent } from './user-profile/user-profile.component';
+import { UserComponent } from './components/user/user.component';
+import { SignUpComponent } from './components/user/sign-up/sign-up.component';
+import { SignInComponent } from './components/user/sign-in/sign-in.component';
+import { UserProfileComponent } from './components/user-profile/user-profile.component';
 import { AuthGuard } from './auth/auth.guard';
+import { NavComponent } from './components/nav/nav.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { SettingsComponent } from './components/settings/settings.component';
+import { ChatComponent } from './components/chat/chat.component';
 
 export const appRoutes: Routes = [
     {
@@ -16,6 +20,24 @@ export const appRoutes: Routes = [
     },
     {
         path: 'userprofile', component: UserProfileComponent,canActivate:[AuthGuard]
+    }, 
+    {
+        path: 'dashboard', 
+        component: NavComponent,
+        canActivate:[AuthGuard],
+        children:[{path:'', component:DashboardComponent}]
+    },
+    {
+        path: 'chat', 
+        component: NavComponent,
+        canActivate:[AuthGuard],
+        children:[{path:'', component:ChatComponent}]
+    },
+    {
+        path: 'settings', 
+        component: NavComponent,
+        canActivate:[AuthGuard],
+        children:[{path:'', component:SettingsComponent}]
     },
     {
         path: '', redirectTo: '/login', pathMatch: 'full'

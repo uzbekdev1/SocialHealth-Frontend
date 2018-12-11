@@ -6,7 +6,7 @@ export interface Types {
   viewValue: string;
 }
 
-import { UserService } from '../../shared/user.service'
+import { UserService } from '../../../shared/user.service'
 
 @Component({
   selector: 'app-sign-up',
@@ -39,12 +39,13 @@ export class SignUpComponent implements OnInit {
     });
   }
 
-  onSubmit(form: FormGroup) {
-    this.userService.postUser(form.value).subscribe(
+  onSubmit(form1: FormGroup,form2: FormGroup) {
+    this.userService.postUser({...form1.value,...form2.value}).subscribe(
       res => {
         this.showSucessMessage = true;
         setTimeout(() => this.showSucessMessage = false, 4000);
-        this.resetForm(form);
+        this.resetForm(form1);
+        this.resetForm(form2);
       },
       err => {
         if (err.status === 422) {
@@ -60,7 +61,9 @@ export class SignUpComponent implements OnInit {
     this.userService.selectedUser = {
       fullName: '',
       email: '',
-      password: ''
+      password: '',
+      userType:'',
+      username:''
     };
     form.reset();
     this.serverErrorMessages = '';

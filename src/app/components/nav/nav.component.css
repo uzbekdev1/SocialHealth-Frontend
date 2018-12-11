@@ -1,0 +1,84 @@
+.example-container {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+  }
+  
+  .example-is-mobile .example-toolbar {
+    position: fixed;
+    /* Make sure the toolbar will stay on top of the content as it scrolls past. */
+    z-index: 10 !important;
+  }
+  .example-toolbar{
+    z-index: 10 !important;
+  }
+  
+  h1.example-app-name {
+    margin-left: 8px;
+  }
+  
+  .example-sidenav-container {
+    /* When the sidenav is not fixed, stretch the sidenav container to fill the available space. This
+       causes `<mat-sidenav-content>` to act as our scrolling element for desktop layouts. */
+    flex: 1;
+  }
+  
+  .example-is-mobile .example-sidenav-container {
+    /* When the sidenav is fixed, don't constrain the height of the sidenav container. This allows the
+       `<body>` to be our scrolling element for mobile layouts. */
+    flex: 1 0 auto;
+  }
+  .mat-drawer {
+    background-color: #202930;
+  }
+  .mat-drawer a{
+    
+    color: #ffffff;
+  }
+  .user-pic{
+    width: 95px;
+    height: 95px;
+    border-radius: 50%;
+    border: 1px solid rgba(0,0,0,.12);
+  }
+  .user-block{
+    padding-top: 1rem !important;
+    padding-bottom: 1rem !important;
+    text-align: center;
+    width: 260px;
+    /* background-color: #ffffff; */
+    background-image: url(http://www.annular.themeseason.com/header-bg.6b195cc4074de3a0c0bd.png);
+    background-blend-mode: overlay;
+    background-size: 300px;
+    /* background-color: #202930; */
+    color: #ffffff;
+  }
+  .user-name{
+    font-size: 20px;
+    margin: 0;
+  }
+  .menu-icon {
+    background: #757575;
+    color: #fff;
+    border-radius: 50%;
+    padding: 5px;
+    margin-right: 10px;
+  }
+  .menu-icon-active{
+    background: #009688;
+    color: #fff;
+  }
+  .menu-item-active .menu-icon{
+    background: #009688;
+    color: #fff;
+  }
+  .menu-item-active{
+    border-left-style: solid;
+    border-left-color:#009688;
+    border-left-width: 3px;
+    background-color: #171e237d;
+  }
