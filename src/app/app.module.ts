@@ -14,6 +14,7 @@ import { AuthGuard } from './auth/auth.guard';
 import { AuthInterceptor } from './auth/auth.interceptor';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { MaterialComponentsModule } from './shared/material-components.module';
+import { SettingsModule } from './components/settings/settings.module';
 // components
 import { AppComponent } from './app.component';
 import { UserComponent } from './components/user/user.component';
@@ -21,8 +22,9 @@ import { SignUpComponent } from './components/user/sign-up/sign-up.component';
 import { NavComponent } from './components/nav/nav.component';
 import { ContentHeaderComponent } from './components/nav/content-header/content-header.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
-import { SettingsComponent } from './components/settings/settings.component';
 import { ChatComponent } from './components/chat/chat.component';
+import { ChatService } from './shared/chat.service';
+import { ExploreComponent } from './components/explore/explore.component';
 
 
 
@@ -37,8 +39,8 @@ import { ChatComponent } from './components/chat/chat.component';
     NavComponent,
     ContentHeaderComponent,
     DashboardComponent,
-    SettingsComponent,
-    ChatComponent
+    ChatComponent,
+    ExploreComponent
   ],
   imports: [
     BrowserModule,
@@ -47,13 +49,14 @@ import { ChatComponent } from './components/chat/chat.component';
     RouterModule.forRoot(appRoutes),
     HttpClientModule,
     BrowserAnimationsModule,
-    MaterialComponentsModule
+    MaterialComponentsModule,
+    SettingsModule
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,
     useClass: AuthInterceptor,
     multi: true
-  },AuthGuard,UserService],
+  },AuthGuard,UserService,ChatService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

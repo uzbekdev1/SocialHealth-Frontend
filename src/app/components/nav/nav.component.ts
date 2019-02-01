@@ -2,19 +2,28 @@ import { Component, OnDestroy, ChangeDetectorRef, OnInit } from '@angular/core';
 import { MediaMatcher } from '@angular/cdk/layout';
 import { UserService } from 'src/app/shared/user.service';
 import { Router } from '@angular/router';
+export interface User {
+  fullName: string;
+  email: string;
+  profilePath:string;
+}
 
 @Component({
   selector: 'app-nav',
   templateUrl: './nav.component.html',
-  styleUrls: ['./nav.component.css']
+  styleUrls: ['./nav.component.scss']
 })
 export class NavComponent implements OnInit, OnDestroy {
-  userDetails;
+  userDetails:User;
+  name:string;
+  picturePath:string;
 
   ngOnInit(): void {
     this.userService.getUserProfile().subscribe(
       res => {
         this.userDetails = res['user'];
+        this.name=this.userDetails.fullName;
+        this.picturePath= this.userDetails.profilePath;
       },
       err => { 
         console.log(err);

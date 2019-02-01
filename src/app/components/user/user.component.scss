@@ -1,3 +1,4 @@
+@import 'src/theme';
 .user-card{
     max-width: 400px;
     margin-left: auto;
@@ -12,7 +13,7 @@
     background-image: url(http://www.annular.themeseason.com/header-bg.6b195cc4074de3a0c0bd.png);
     background-blend-mode: overlay;
     background-size: 300px;
-    background-color: #009688;
+    background-color: $primary;
     color: #fff;
 }
 .card-title{
@@ -27,6 +28,7 @@
     margin-bottom: 1rem;
 }
 .container {
+    background: url('/src/assets/img/material-background.jpg');
     display: flex;
     flex-direction: column;
     position: absolute;

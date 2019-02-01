@@ -1,3 +1,4 @@
+@import 'src/theme';
 .example-container {
     display: flex;
     flex-direction: column;
@@ -51,7 +52,9 @@
     text-align: center;
     width: 260px;
     /* background-color: #ffffff; */
-    background-image: url(http://www.annular.themeseason.com/header-bg.6b195cc4074de3a0c0bd.png);
+    /* background-image: url(http://www.annular.themeseason.com/header-bg.6b195cc4074de3a0c0bd.png); */
+    background-image: url('/src/assets/img/material-background.jpg');
+    background-size: contain;
     background-blend-mode: overlay;
     background-size: 300px;
     /* background-color: #202930; */
@@ -69,16 +72,16 @@
     margin-right: 10px;
   }
   .menu-icon-active{
-    background: #009688;
+    background: $primary;
     color: #fff;
   }
   .menu-item-active .menu-icon{
-    background: #009688;
+    background: $primary;
     color: #fff;
   }
   .menu-item-active{
     border-left-style: solid;
-    border-left-color:#009688;
+    border-left-color:$primary;
     border-left-width: 3px;
     background-color: #171e237d;
   }

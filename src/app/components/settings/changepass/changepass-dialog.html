@@ -1,0 +1,16 @@
+<div mat-dialog-content>
+  <!-- <p>Change Password</p> -->
+  <mat-form-field>
+    <input matInput [(ngModel)]="data.oldPassword" placeholder="Old Password">
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput [(ngModel)]="data.newPassword" placeholder="New Password">
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput placeholder="Confirm Password">
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">No Thanks</button>
+  <button mat-button [mat-dialog-close]="data.newPassword" cdkFocusInitial>Ok</button>
+</div>

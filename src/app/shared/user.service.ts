@@ -12,30 +12,44 @@ export class UserService {
     fullName: '',
     email: '',
     password: '',
-    userType:'',
-    username:''
+    picturePath: '',
+    userType: '',
+    username: ''
   };
-
+  _id;
   noAuthHeader = { headers: new HttpHeaders({ 'NoAuth': 'True' }) };
 
   constructor(private http: HttpClient) { }
 
-  //HttpMethods
+  // HttpMethods
 
-  postUser(user: User){
-    return this.http.post(environment.apiBaseUrl+'/register',user,this.noAuthHeader);
+  postUser(user: User) {
+    return this.http.post(environment.apiBaseUrl + '/register', user, this.noAuthHeader);
   }
 
   login(authCredentials) {
-    return this.http.post(environment.apiBaseUrl + '/authenticate', authCredentials,this.noAuthHeader);
+    return this.http.post(environment.apiBaseUrl + '/authenticate', authCredentials, this.noAuthHeader);
   }
 
   getUserProfile() {
     return this.http.get(environment.apiBaseUrl + '/userProfile');
   }
+  uploadPicture(image){
+    let postData;
+    if (typeof(image) === 'object') {
+      postData = new FormData();
+      postData.append('_id', this._id); 
+      postData.append('image', image, "profile"); // title sets the filename
+    } else {
+        postData = {
+        _id: this._id,
+        imagePath: image
+      };
+    }
+    return this.http.post(environment.apiBaseUrl + '/uploadPicture',postData);
+  }
 
-
-  //Helper Methods
+  // Helper Methods
 
   setToken(token: string) {
     localStorage.setItem('token', token);
@@ -50,21 +64,26 @@ export class UserService {
   }
 
   getUserPayload() {
-    var token = this.getToken();
+    // tslint:disable-next-line:prefer-const
+    let token = this.getToken();
     if (token) {
-      var userPayload = atob(token.split('.')[1]);
-      console.log(JSON.parse(userPayload))
+      // tslint:disable-next-line:prefer-const
+      let userPayload = atob(token.split('.')[1]);
+      console.log( JSON.parse(userPayload));
+      this._id=JSON.parse(userPayload)._id;
       return JSON.parse(userPayload);
-    }
-    else
+    } else {
       return null;
+    }
   }
 
   isLoggedIn() {
-    var userPayload = this.getUserPayload();
-    if (userPayload)
+    // tslint:disable-next-line:prefer-const
+    let userPayload = this.getUserPayload();
+    if (userPayload) {
       return userPayload.exp > Date.now() / 1000;
-    else
+    } else {
       return false;
+    }
   }
 }

@@ -1,0 +1,46 @@
+<div mat-dialog-content>
+  <form [formGroup]="form">
+    <div *ngIf="!toggleCamera">
+      <button mat-stroked-button type="button" (click)="filePicker.click()">Pick Image</button>
+      <input type="file" #filePicker (change)="onImagePicked($event)"/>
+      <button mat-raised-button (click)="toggleCamera = !toggleCamera">Take Picture</button>
+    </div>
+  </form>
+  <div style="text-align:center" *ngIf="toggleCamera">
+      <div *ngIf="!webcamImage">
+        <webcam [height]="500" [width]="500" [trigger]="triggerObservable" (imageCapture)="handleImage($event)" *ngIf="showWebcam"
+        [allowCameraSwitch]="allowCameraSwitch" [switchCamera]="nextWebcamObservable"
+        [videoOptions]="videoOptions"
+        (cameraSwitched)="cameraWasSwitched($event)"
+        (initError)="handleInitError($event)"
+        ></webcam>
+        <br/>
+        <button mat-raised-button (click)="triggerSnapshot();">Take A Snapshot</button>
+        <button mat-raised-button  (click)="toggleWebcam();">Toggle Webcam</button>
+        <br/>
+        <button mat-raised-button  (click)="showNextWebcam(true);" [disabled]="!multipleWebcamsAvailable">Next Webcam</button>
+        <br/>
+        <button mat-raised-button (click)="showNextWebcam(deviceId);">Activate</button>
+      </div>
+    </div>
+    
+    <div *ngIf="imagePreview !== '' && imagePreview && form.get('image').valid">
+      <img class="snapshot" [src]="imagePreview" [alt]="form.value.title"/>
+    </div>
+    <div *ngIf="webcamImage">
+      <img class="snapshot" [src]="webcamImage.imageAsDataUrl"/>
+    </div>
+    
+    <h4 *ngIf="errors.length > 0">Messages:</h4>
+    <ul *ngFor="let error of errors">
+      <li>{{error | json}}</li>
+    </ul>
+    
+</div>
+
+
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">No Thanks</button>
+  <button mat-button [mat-dialog-close]="data.newPassword" cdkFocusInitial>Ok</button>
+  <button mat-button (click)="onSaveImage()" >Save</button>
+</div>

@@ -1,3 +1,4 @@
+@import 'src/theme';
 .title-toolbar{
     padding-top: 1rem!important;
     padding-bottom: 1rem!important;
@@ -5,7 +6,7 @@
     background-image: url(http://www.annular.themeseason.com/header-bg.6b195cc4074de3a0c0bd.png);
     background-blend-mode: overlay;
     background-size: 300px;
-    background-color: #009688;
+    background-color: $primary;
   }
   .title{
     font-size: 20px;

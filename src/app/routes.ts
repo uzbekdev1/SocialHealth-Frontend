@@ -8,6 +8,7 @@ import { NavComponent } from './components/nav/nav.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { SettingsComponent } from './components/settings/settings.component';
 import { ChatComponent } from './components/chat/chat.component';
+import { ExploreComponent } from './components/explore/explore.component';
 
 export const appRoutes: Routes = [
     {
@@ -26,6 +27,12 @@ export const appRoutes: Routes = [
         component: NavComponent,
         canActivate:[AuthGuard],
         children:[{path:'', component:DashboardComponent}]
+    },
+    {
+        path: 'explore', 
+        component: NavComponent,
+        canActivate:[AuthGuard],
+        children:[{path:'', component:ExploreComponent}]
     },
     {
         path: 'chat', 
