@@ -34,7 +34,12 @@ export class UserService {
   getUserProfile() {
     return this.http.get(environment.apiBaseUrl + '/userProfile');
   }
+  changePassword(data){
+    data._id=this._id;
+    return this.http.post(environment.apiBaseUrl + '/changePassword',data);
+  }
   uploadPicture(image){
+    console.log(image)
     let postData;
     if (typeof(image) === 'object') {
       postData = new FormData();
@@ -47,6 +52,10 @@ export class UserService {
       };
     }
     return this.http.post(environment.apiBaseUrl + '/uploadPicture',postData);
+  }
+
+  getExploreDoctor(){
+    return this.http.get(environment.apiBaseUrl + '/explore');
   }
 
   // Helper Methods
@@ -69,7 +78,7 @@ export class UserService {
     if (token) {
       // tslint:disable-next-line:prefer-const
       let userPayload = atob(token.split('.')[1]);
-      console.log( JSON.parse(userPayload));
+      // console.log( JSON.parse(userPayload));
       this._id=JSON.parse(userPayload)._id;
       return JSON.parse(userPayload);
     } else {

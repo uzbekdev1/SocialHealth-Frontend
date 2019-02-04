@@ -10,7 +10,7 @@
         type="password" #password="ngModel" [(ngModel)]="model.password" required minlength="4">
       </mat-form-field>
       <mat-card-actions class="card-actions text-center">
-        <button type="submit" mat-raised-button color="primary" (click)="signInForm.valid && onSubmit(signInForm)">Iniciar Sesion</button>
+        <button cdkFocusInitial type="submit" mat-raised-button color="primary" (click)="signInForm.valid && onSubmit(signInForm)">Iniciar Sesion</button>
         <span class="fill-remaining-space"></span>
         <button mat-button color="primary" routerLink="/signup">Crear Cuenta</button>
       </mat-card-actions>

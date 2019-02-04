@@ -1,4 +1,4 @@
-@import 'src/theme';
+@import '../../../theme';
 .user-card{
     max-width: 400px;
     margin-left: auto;
@@ -10,7 +10,7 @@
     padding-bottom: 1rem!important;
     border-top-left-radius: 4px;
     border-top-right-radius: 4px;
-    background-image: url(http://www.annular.themeseason.com/header-bg.6b195cc4074de3a0c0bd.png);
+    background-image: url('http://www.annular.themeseason.com/header-bg.6b195cc4074de3a0c0bd.png');
     background-blend-mode: overlay;
     background-size: 300px;
     background-color: $primary;
@@ -28,7 +28,7 @@
     margin-bottom: 1rem;
 }
 .container {
-    background: url('/src/assets/img/material-background.jpg');
+    background: url("../../../assets/img/material-background.jpg");
     display: flex;
     flex-direction: column;
     position: absolute;

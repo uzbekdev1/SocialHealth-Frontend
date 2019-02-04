@@ -1,10 +1,12 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, Inject, ViewChild } from '@angular/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { WebcamUtil, WebcamImage, WebcamInitError } from 'ngx-webcam';
 import { Subject, Observable } from 'rxjs';
 import { mimeType } from './mime-type.validator';
 import { UserService } from 'src/app/shared/user.service';
+import { CroppieOptions } from 'croppie';
+import { NgxCroppieComponent } from './ngx-croppie/ngx-croppie.component';
 
 
 
@@ -30,12 +32,12 @@ export class ChangepictureComponent implements OnInit {
 
   openDialog(): void {
     const dialogRef = this.dialog.open(ChangepictureDialog, {
-      width: '500px',
+      width: '400px',
       data: { picUrl: this.picUrl}
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
+      // console.log('The dialog was closed');
       // this.picUrl = result;
     });
   }
@@ -71,11 +73,30 @@ export class ChangepictureDialog {
     this.form.get('image').updateValueAndValidity();
     const reader = new FileReader();
     reader.onload = () => {
-      this.imagePreview = reader.result;
+      this.croppieImage = reader.result;
     };
     reader.readAsDataURL(file);
   }
+  dataURItoBlob(dataURI) {
+    // convert base64/URLEncoded data component to raw binary data held in a string
+    let byteString;
+    if (dataURI.split(',')[0].indexOf('base64') >= 0)
+        byteString = atob(dataURI.split(',')[1]);
+    else
+        byteString = unescape(dataURI.split(',')[1]);
+    // separate out the mime component
+    let mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0];
+    // write the bytes of the string to a typed array
+    let ia = new Uint8Array(byteString.length);
+    for (var i = 0; i < byteString.length; i++) {
+        ia[i] = byteString.charCodeAt(i);
+    }
+    return new Blob([ia], {type:mimeString});
+}
+  
   onSaveImage(){
+    let blobUrl = this.dataURItoBlob(this.editedImage);
+    this.form.patchValue({image: blobUrl});
     this.userservice.uploadPicture(this.form.value.image).subscribe(      
       res => {
         console.log(res)
@@ -86,8 +107,50 @@ export class ChangepictureDialog {
     });
     // this.form.reset();
   }
+  /* croppie */
 
-  //camera
+  @ViewChild('ngxcroppie') ngxCroppie: NgxCroppieComponent;
+
+  widthPx = '250';
+  heightPx = '250';
+  imageUrl = '';
+  currentImage: string;
+  croppieImage: string;
+  editedImage:string;
+
+  public get imageToDisplay() {
+    if (this.currentImage) { return this.currentImage; }
+    if (this.imageUrl) { return this.imageUrl; }
+    return ``;
+  }
+
+  public get croppieOptions(): CroppieOptions {
+    const opts: CroppieOptions = {};
+    opts.viewport = {
+      width: parseInt(this.widthPx, 10),
+      height: parseInt(this.heightPx, 10)
+    };
+    opts.boundary = {
+      width: parseInt(this.widthPx, 10),
+      height: parseInt(this.heightPx, 10)
+    };
+    opts.enforceBoundary = true;
+    return opts;
+  }
+
+  newImageResultFromCroppie(img: string) {
+    this.editedImage = img;
+  }
+
+  saveImageFromCroppie() {
+    this.currentImage = this.editedImage;
+  }
+
+  cancelCroppieEdit() {
+    this.croppieImage = this.currentImage;
+  }
+
+  /* camera */
 
     // toggle webcam on/off
     public showWebcam = true;
@@ -135,12 +198,13 @@ export class ChangepictureDialog {
     }
   
     public handleImage(webcamImage: WebcamImage): void {
-      console.info("received webcam image", webcamImage);
+      // console.info("received webcam image", webcamImage);
       this.webcamImage = webcamImage;
+      this.croppieImage = webcamImage.imageAsDataUrl;
     }
   
     public cameraWasSwitched(deviceId: string): void {
-      console.log("active device: " + deviceId);
+      // console.log("active device: " + deviceId);
       this.deviceId = deviceId;
     }
   

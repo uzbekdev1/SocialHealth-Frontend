@@ -1,4 +1,4 @@
-@import 'src/theme';
+@import './../../../theme';
 .example-container {
     display: flex;
     flex-direction: column;
@@ -53,7 +53,7 @@
     width: 260px;
     /* background-color: #ffffff; */
     /* background-image: url(http://www.annular.themeseason.com/header-bg.6b195cc4074de3a0c0bd.png); */
-    background-image: url('/src/assets/img/material-background.jpg');
+    background-image: url('../../../assets/img/material-background.jpg');
     background-size: contain;
     background-blend-mode: overlay;
     background-size: 300px;
@@ -63,6 +63,7 @@
   .user-name{
     font-size: 20px;
     margin: 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
   }
   .menu-icon {
     background: #757575;
@@ -84,4 +85,7 @@
     border-left-color:$primary;
     border-left-width: 3px;
     background-color: #171e237d;
+  }
+  .menu-item{
+    color: #fff !important;
   }

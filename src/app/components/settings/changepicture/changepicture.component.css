@@ -5,7 +5,8 @@
     display: none;
 }
 input[type="file"] {
-    visibility: hidden;
+    /* visibility: hidden; */
+    display: none;
   }
   
   .image-preview {

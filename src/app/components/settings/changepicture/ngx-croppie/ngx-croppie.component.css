@@ -1,0 +1,11 @@
+.page {
+    background: #FFF;
+    padding: 20px;
+    margin: 20px;
+}
+.demo-basic {
+    width: 400px;
+    height: 300px;
+    max-width: 100%;
+    max-height: 100%;
+}

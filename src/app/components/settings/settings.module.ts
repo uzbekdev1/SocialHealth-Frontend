@@ -6,7 +6,9 @@ import { MaterialComponentsModule } from 'src/app/shared/material-components.mod
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SettingsComponent } from './settings.component';
 import { ChangepictureComponent, ChangepictureDialog } from './changepicture/changepicture.component';
-import {WebcamModule} from 'ngx-webcam';
+import { NgxCroppieModule } from './changepicture/ngx-croppie/ngx-croppie.module';
+import { WebcamModule } from 'ngx-webcam';
+
 
 @NgModule({
   imports: [
@@ -15,6 +17,7 @@ import {WebcamModule} from 'ngx-webcam';
     MaterialComponentsModule,
     FormsModule,
     ReactiveFormsModule,
+    NgxCroppieModule,
     WebcamModule
   ],
   declarations: [
@@ -25,7 +28,7 @@ import {WebcamModule} from 'ngx-webcam';
     ChangepictureDialog
   ],
   entryComponents: [
-    ChangepassDialog,ChangepictureDialog
+    ChangepassDialog, ChangepictureDialog
   ],
 })
 export class SettingsModule { }
